@@ -4,14 +4,11 @@ const expectBrand = [
 
 const womenCategories = [
     {
-        name: 'Giyim',
-        url: 'https://www.trendyol.com/sr?wg=1&wc=82&rd=true&sst=BEST_SELLER'
-    },
-    {
-        name: 'Elbise',
-        url: 'https://www.trendyol.com/sr?wc=56&rd=true&sst=BEST_SELLER'
+        name: 'Aksesuar',
+        url : 'https://www.trendyol.com/sr?wg=1&wc=27&sst=BEST_SELLER&rd=true'
     }
 ]
+
 
 export {
     womenCategories,
