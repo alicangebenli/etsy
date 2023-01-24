@@ -5,7 +5,7 @@ import axios from "axios";
 import db from "../helpers/db.js";
 
 const creator = {
-    async etsy({products, res}) {
+    async etsy({products}) {
         const {images, productGroupId, price, enTitle, formattedPrice, enDesc, title, desc, url} = products[0];
         /*Files*/
         await file.clearFileDirectory();
@@ -21,12 +21,12 @@ const creator = {
             title: enTitle || title,
             formattedPrice,
             desc: enDesc || desc,
-            res
         })
         await db.add({
             trendyolUrl: url,
             etsyUrl: product.url
-        })
+        });
+        await file.clearFileDirectory();
     },
     async imageLoader({images}) {
         const browser = await puppeteer.launch({
@@ -73,7 +73,7 @@ const creator = {
         await browser.close();
         return imagesList;
     },
-    async create({imageIds, productGroupId, price, title, desc, formattedPrice, res}) {
+    async create({imageIds, productGroupId, price, title, desc, formattedPrice}) {
         const cookie = cookies.map(x => x.name + '=' + x.value).join(';');
 
         const data = JSON.stringify({
@@ -226,7 +226,7 @@ const creator = {
                 'accept': 'application/json, text/javascript, */*; q=0.01',
                 'accept-language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
                 'content-type': 'application/json',
-                'cookie': 'user_prefs=dEvrw12blIWNZMJTzfIYDQbhlQFjZACC5J23p8HoaKWQoEglnbzSnBwdpdQ83dBgJR2gEFTECELhImIZAA..; fve=1673124758.0; ua=531227642bc86f3b5fd7103a0c0b4fd6; _gcl_au=1.1.1639382770.1673124760; _tt_enable_cookie=1; _ttp=2805cFkBCeDGwmA0BLS6POCpmgB; _pin_unauth=dWlkPU9XSXlObVV5WWpBdFkyWXhNaTAwWldKbExUZ3lZalV0WWpVMk1qazFORFZpWlRBeg; G_ENABLED_IDPS=google; session-key-apex=683690058-1130702022807-1e5febfd1dc6c1241047bc3197c329403de7cea54c2e8bc286645903|1675716764; LD=1; last_browse_page=https%3A%2F%2Fwww.etsy.com%2F; dashboard_stats_range=all_time; uaid=XbX5aDc3LCQTZQXhzZbvZmxHfdZjZACC5J23p4Hpw3lc1UqliZkpSlZK2amhrhHhGc4--akRJm7pqZGBkboWLsXeRQaRPkq1DAA.; _gid=GA1.2.1869869820.1673868594; session-key-www=683690058-1130702022807-08e844594cef74a0564bc82ad96ba348a4154114b98d035af7c88b9c|1676481788; et-v1-1-1-_etsy_com=2%3A5dad0647a7a90f1a6e0a75bcdb717dba55bfdadd%3A1673124763%3A1673953776%3A__athena_compat-683690058-1130702022807-53a48461de6efbf73aed2b7bc981adb7c417bee68a2962be5b9175f4b5593577035a57aa9b9ecca5; _ga=GA1.1.1819584751.1673124760; _uetsid=1905ade0959111edbdc5e5bd773998f3; _uetvid=399091208ecd11edaec5f3870363f26d; _ga_KR3J610VYM=GS1.1.1673974238.16.1.1673976004.56.0.0; et-v1-1-1-_etsy_com=2%3A2a0eee92ed39c841126a8e1ad3dd5273f6ffdeed%3A1673124763%3A1673974228%3A__athena_compat-683690058-1130702022807-53a48461de6efbf73aed2b7bc981adb7c417bee68a2962be5b9175f4b5593577035a57aa9b9ecca5',
+                'cookie': cookie,
                 'origin': 'https://www.etsy.com',
                 'referer': 'https://www.etsy.com/your/shops/TurkeyShopAnkara/tools/listings/create',
                 'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
