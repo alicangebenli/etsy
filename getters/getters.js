@@ -118,7 +118,8 @@ const trendyol = {
             isHasVariant: product?.attributes?.length <= 1 && product?.variants?.length <= 1,
             images: product?.images.map(x => 'https://cdn.dsmcdn.com' + x),
             formattedPrice: toCurrencyString(price),
-            buyPrice: buyPrice
+            buyPrice: buyPrice,
+            barcode: product.variants[0].barcode
         }
     },
     getProductVariants() {

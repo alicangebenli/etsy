@@ -245,6 +245,7 @@ const creator = {
 
             return response.data;
         } catch (e) {
+            console.log(e)
             return false
         }
     }

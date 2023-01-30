@@ -5,7 +5,7 @@ const expectBrand = [
 const womenCategories = [
     {
         name: 'Aksesuar',
-        url : 'https://www.trendyol.com/sr?wg=1&wc=27&sst=BEST_SELLER&rd=true'
+        url : 'https://www.trendyol.com/kadin-giyim-x-g1-c82?sst=SCORE'
     }
 ]
 
